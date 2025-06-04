@@ -1,89 +1,81 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>18. századi szövegátalakító</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18. századi helyesírás-átalakító</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo&display=swap" rel="stylesheet">
+  <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: white;
-      color: black;
+      font-family: 'Cardo', serif;
+      background: #f4f1ec;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
-    body.dark {
-      background-color: #121212;
-      color: white;
+    h1 {
+      color: #432c10;
     }
     textarea {
-      width: 100%;
+      width: 80%;
       height: 150px;
-      margin-bottom: 10px;
-      padding: 10px;
-      font-size: 16px;
+      margin: 1rem 0;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 2px solid #a08b5f;
+      border-radius: 8px;
+      background: #fffdfa;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      background: #6c513a;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #5b422d;
     }
     .output {
-      white-space: pre-wrap;
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      border-radius: 5px;
+      width: 80%;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px dashed #a08b5f;
+      background: #fff;
       min-height: 100px;
-      font-size: 16px;
+      white-space: pre-wrap;
     }
-    label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-</style>
+  </style>
 </head>
 <body>
-<h1>18. századi szövegátalakító</h1>
- 
-  <label>
-<input type="checkbox" id="darkModeToggle">
-    Sötét mód
-</label>
- 
-  <textarea id="inputText" placeholder="Írd ide a szöveget..."></textarea><br>
-<button id="convertBtn">Átalakítás</button>
- 
-  <div id="outputText" class="output">Itt fog megjelenni az átalakított szöveg.</div>
- 
+  <h1>18. századi helyesírás-átalakító</h1>
+  <textarea id="inputText" placeholder="Írd ide a szöveget..."></textarea>
+  <button onclick="convertText()">Átalakítás</button>
+  <div class="output" id="outputText"></div>
+
   <script>
-    const inputText = document.getElementById('inputText');
-    const outputText = document.getElementById('outputText');
-    const convertBtn = document.getElementById('convertBtn');
-    const darkModeToggle = document.getElementById('darkModeToggle');
- 
-    function convertText(text) {
-      return text
-        .replace(/cs/g, 'ts')
-        .replace(/CS/g, 'TS')
-        .replace(/Cs/g, 'Ts')
-        .replace(/és/g, '’s')
-        .replace(/ÉS/g, '’S')
-        .replace(/nincs/g, 'nints')
-        .replace(/Nincs/g, 'Nints')
-        .replace(/ly/g, 'lly')
-        .replace(/Ly/g, 'Lly');
+    function convertText() {
+      const input = document.getElementById('inputText').value;
+      let output = input;
+
+      // Egyszerűsített szabályok (példák)
+      output = output.replace(/sz/g, 'ſz');     // hosszú s
+      output = output.replace(/s/g, 'ſ');        // hosszú s mindenhol máshol
+      output = output.replace(/cs/g, 'ts');
+      output = output.replace(/zs/g, 'zs');      // meghagyjuk, de később lehet bővíteni
+      output = output.replace(/c/g, 'cz');
+      output = output.replace(/j/g, 'i');        // régi i/j keveredés
+      output = output.replace(/é/g, 'ee');
+      output = output.replace(/á/g, 'aa');
+
+      document.getElementById('outputText').innerText = output;
     }
- 
-    convertBtn.addEventListener('click', function () {
-      const input = inputText.value;
-      const converted = convertText(input);
-      outputText.textContent = converted || 'Itt fog megjelenni az átalakított szöveg.';
-    });
- 
-    darkModeToggle.addEventListener('change', function () {
-      document.body.classList.toggle('dark', darkModeToggle.checked);
-    });
-</script>
+  </script>
 </body>
 </html>
