@@ -1,98 +1,8 @@
-﻿import { useState } from "react";
-
-import { Textarea } from "@/components/ui/textarea";
-
-import { Button } from "@/components/ui/button";
-
-import { Card, CardContent } from "@/components/ui/card";
-
-import { Switch } from "@/components/ui/switch";
- 
-export default function Converter() {
-
-  const [input, setInput] = useState("");
-
-  const [output, setOutput] = useState("");
-
-  const [darkMode, setDarkMode] = useState(false);
- 
-  const convertText = (text) => {
-
-    return text
-
-      .replace(/cs/g, "ts")
-
-      .replace(/CS/g, "TS")
-
-      .replace(/Cs/g, "Ts")
-
-      .replace(/és/g, "’s")
-
-      .replace(/ÉS/g, "’S")
-
-      .replace(/nincs/g, "nints")
-
-      .replace(/Nincs/g, "Nints")
-
-      .replace(/ly/g, "lly")
-
-      .replace(/Ly/g, "Lly");
-
-  };
- 
-  const handleConvert = () => {
-
-    setOutput(convertText(input));
-
-  };
- 
-  return (
-<div className={`min-h-screen p-4 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-<div className="flex justify-between items-center mb-4">
-<h1 className="text-2xl font-bold">18. századi szövegátalakító</h1>
-<div className="flex items-center gap-2">
-<span>Sötét mód</span>
-<Switch checked={darkMode} onCheckedChange={setDarkMode} />
-</div>
-</div>
-<Card className="mb-4">
-<CardContent className="p-4">
-<Textarea
-
-            placeholder="Írd ide a szöveget..."
-
-            value={input}
-
-            onChange={(e) => setInput(e.target.value)}
-
-            className="mb-4"
-
-          />
-<Button onClick={handleConvert}>Átalakítás</Button>
-</CardContent>
-</Card>
-<Card>
-<CardContent className="p-4 whitespace-pre-wrap">
-
-          {output || "Itt fog megjelenni az átalakított szöveg."}
-</CardContent>
-</Card>
-</div>
-
-  );
-
-}
-
- 
-npx create-react-app ai-tusa
- 
-egyfájlos HTML + JavaScript
- 
 <!DOCTYPE html>
 <html lang="hu">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>18. századi szövegátalakító</title>
 <style>
 
@@ -102,123 +12,54 @@ egyfájlos HTML + JavaScript
 
       padding: 20px;
 
-      background-color: white;
+      max-width: 800px;
 
-      color: black;
+      margin: auto;
+
+      transition: background-color 0.3s ease, color 0.3s ease;
 
     }
 
     body.dark {
 
-      background-color: #222;
+      background-color: #121212;
 
       color: white;
 
     }
-
-    textarea {
+ 
+    textarea, .output {
 
       width: 100%;
 
-      height: 150px;
+      padding: 12px;
 
-      margin-bottom: 10px;
-
-    }
-
-    button {
-
-      padding: 10px 20px;
+      margin-bottom: 12px;
 
       font-size: 16px;
 
-    }
-
-    .output {
-
-      white-space: pre-wrap;
-
-      margin-top: 20px;
+      border-radius: 8px;
 
       border: 1px solid #ccc;
 
-      padding: 10px;
-
-      border-radius: 5px;
-
-      min-height: 100px;
+      transition: background-color 0.3s ease;
 
     }
 
-    label {
+    body.dark textarea, body.dark .output {
 
-      display: flex;
+      background-color: #1e1e1e;
 
-      align-items: center;
+      color: white;
 
-      gap: 10px;
-
-      margin-bottom: 20px;
-
-    }
-</style>
-</head>
-<body>
-<h1>18. századi szövegátalakító</h1>
-<label>
-<input type="checkbox" id="darkModeToggle" />
-
-    Sötét mód
-</label>
-<textarea id="inputText" placeholder="Írd ide a szöveget..."></textarea><br />
-<button id="convertBtn">Átalakítás</button>
-<div id="outputText" class="output">Itt fog megjelenni az átalakított szöveg.</div>
- 
-  <script>
-
-    const inputText = document.getElementById('inputText');
-
-    const outputText = document.getElementById('outputText');
-
-    const convertBtn = document.getElementById('convertBtn');
-
-    const darkModeToggle = document.getElementById('darkModeToggle');
- 
-    function convertText(text) {
-
-      return text
-
-        .replace(/cs/g, 'ts')
-
-        .replace(/CS/g, 'TS')
-
-        .replace(/Cs/g, 'Ts')
-
-        .replace(/és/g, '’s')
-
-        .replace(/ÉS/g, '’S')
-
-        .replace(/nincs/g, 'nints')
-
-        .replace(/Nincs/g, 'Nints')
-
-        .replace(/ly/g, 'lly')
-
-        .replace(/Ly/g, 'Lly');
+      border: 1px solid #555;
 
     }
  
-    convertBtn.addEventListener('click', () => {
+    .output {
 
-      outputText.textContent = convertText(inputText.value);
+      min-height: 120px;
 
-    });
- 
-    darkModeToggle.addEventListener('change', () => {
+      white-space: pre-wrap;
 
-      document.body.classList.toggle('dark', darkModeToggle.checked);
-
-    });
-</script>
-</body>
-</html>
+      background-image: url('https
